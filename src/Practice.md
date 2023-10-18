@@ -3,16 +3,16 @@ import "./App.css"
 import butcherPigImage from "./assets/butcherPig.jpeg"
 
 
-// function hasNoVowelsOtherThanY(word) {
-//   const vowels = ['a', 'e', 'i', 'o', 'u'];
-//   word = word.toLowerCase();
-//   for (let i = 0; i < word.length; i++) {
-//     if (word[i] !== 'y' && vowels.includes(word[i])) {
-//       return false;
-//     }
-//   }
-//   return true;
-// }
+function hasNoVowelsOtherThanY(word) {
+  const vowels = ['a', 'e', 'i', 'o', 'u'];
+  word = word.toLowerCase();
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] !== 'y' && vowels.includes(word[i])) {
+      return false;
+    }
+  }
+  return true;
+}
  
 const App = () => {
   // ACTION ITEM: to make the development process easier there are some preassigned words in the input field, when you are ready for your full user experience delete the test words passed to useState and pass an empty string
@@ -45,10 +45,7 @@ const App = () => {
 
       let translatedWord;
 
-      if (!/[aeiou]/i.test(eachWord)) {
-        // If there are no vowels in the word
-        translatedWord = eachWord.slice(2) + eachWord.slice(0,2) + "ay";
-      } else if (eachWord.toLowerCase().startsWith("qu")) {
+      if (eachWord.toLowerCase().startsWith("qu")) {
         // If the word starts with "qu"
         translatedWord = eachWord.slice(2) + "quay";
       } else if (vowelsArray.length > 0 && vowelsArray[0].toLowerCase() !== 'a') {
@@ -59,10 +56,10 @@ const App = () => {
         // If there are no vowels in the word
         translatedWord = eachWord + "ay";
       } 
-      // else if (hasNoVowelsOtherThanY(eachWord)) {
-      //   // Use the custom function to check for words with no vowels other than "y"
-      //   translatedWord = eachWord.slice(1) + eachWord[0] + "ay";
-      // }
+      else if (hasNoVowelsOtherThanY(eachWord)) {
+        // Use the custom function to check for words with no vowels other than "y"
+        translatedWord = eachWord.slice(1) + eachWord[0] + "ay";
+      }
       else {
         // If the word starts with a vowel or doesn't have any vowels
         translatedWord = eachWord + 'way';
@@ -80,6 +77,7 @@ const App = () => {
       // ACTION ITEM: your Pig Latin logic goes here!
 
       // ACTION ITEM: this return will be the output of your Pig Latin'd code
+      return eachWord
     })
 
     // NO MODIFICATION NEEDED: once the code has been modified it gets joined from an array back to a string
