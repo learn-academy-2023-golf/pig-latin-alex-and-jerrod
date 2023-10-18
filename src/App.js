@@ -31,6 +31,18 @@ const App = () => {
       })
       console.log("vowelsArray:", vowelsArray)
 
+      let translatedWord;
+
+    if (vowelsArray.length > 0 && vowelsArray[0].toLowerCase() !== 'a') {
+      // If there are vowels and the first vowel is not 'a'
+      const firstVowelIndex = eachWord.indexOf(vowelsArray[0]);
+      translatedWord = eachWord.slice(firstVowelIndex) + eachWord.slice(0, firstVowelIndex) + "ay";
+    } else {
+      // If the word starts with a vowel or doesn't have any vowels
+      translatedWord = eachWord + 'way';
+    }
+
+    return translatedWord;
       // ACTION ITEM: your Pig Latin logic goes here!
 
       // ACTION ITEM: this return will be the output of your Pig Latin'd code
