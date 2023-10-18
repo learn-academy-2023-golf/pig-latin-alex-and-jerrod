@@ -25,11 +25,10 @@ const App = () => {
   const myPigLatinCodeHere = () => {
     // NO MODIFICATION NEEDED: the variable "arrayOfUserInput" will contain the text input from the user split into an array of words
     const arrayOfUserInput = userInput.split(" ")
-    console.log("arrayOfUserInput:", arrayOfUserInput)
+
 
     // NO MODIFICATION NEEDED: now that we have an array of words, we can map over the array and look at each word
     const translatedWordsArray = arrayOfUserInput.map((eachWord) => {
-      console.log("eachWord:", eachWord)
 
       // NO MODIFICATION NEEDED: this code will look at each word and identify the vowels
       const vowelsArray = eachWord.split("").filter((vowel) => {
@@ -41,13 +40,18 @@ const App = () => {
           // vowel === "u" // In order to complete the second story "u" could only be refrenced once. i.e with "q" in "qu".
         )
       })
-      console.log("vowelsArray:", vowelsArray)
+      
+      let translatedWord = ''; //first variable
+      let punctuation = ''; //second variable
 
-      let translatedWord;
-
-      if (!/[aeiou]/i.test(eachWord)) {
+    // Check for punctuation at the end of the word
+    if (/[.,;!?]/.test(eachWord[eachWord.length - 1])) { //When you subtract 1 from word.length, you're effectively getting the index of the last character in the string.
+      punctuation = eachWord[eachWord.length - 1];
+      eachWord = eachWord.slice(0, -1); // Remove the punctuation from the word
+    }
+      if (!/[aeiou]/i.test(eachWord)) { //is a character set, which means it will match any character that is one of the characters inside the brackets. it matches any vowel
         // If there are no vowels in the word
-        translatedWord = eachWord.slice(2) + eachWord.slice(0,2) + "ay";
+        translatedWord = eachWord.slice(2) + eachWord.slice(0,2) + "ay"; //word.slice(2): This extracts a substring from word starting from index 2 onwards and word.slice(0, 2): This extracts a substring from word starting from index 0 up to (but not including) index 2.
       } else if (eachWord.toLowerCase().startsWith("qu")) {
         // If the word starts with "qu"
         translatedWord = eachWord.slice(2) + "quay";
@@ -84,7 +88,7 @@ const App = () => {
 
     // NO MODIFICATION NEEDED: once the code has been modified it gets joined from an array back to a string
     const translatedWords = translatedWordsArray.join(" ")
-    console.log("translatedWords:", translatedWords)
+  
 
     // NO MODIFICATION NEEDED: this will update the inputTranslated variable in state
     setInputTranslated(translatedWords)
